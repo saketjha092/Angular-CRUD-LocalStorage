@@ -1,0 +1,125 @@
+
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  input[type="date"],
+  input[type="color"],
+  input[type="checkbox"],
+  input[type="radio"],
+  select,
+  textarea,
+  button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+
+  input[type="checkbox"],
+  input[type="radio"] {
+    width: auto;
+  }
+
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  .radio-group {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  flex-wrap: wrap;
+  }
+  .radio-group label {
+    color: #707070;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+
+  button {
+    background-color: #67a5e7;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
+  .column {
+    display: flex;
+    column-gap: 15px;
+  }
+  input.ng-invalid.ng-touched{
+    border: red 2px solid;
+  }
+  
+  small{
+    color: red;
+    font-weight: bold;
+  }
+  .horizontal-skills {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .skill {
+    display: inline-block;
+    padding: 5px;
+    margin: 2px;
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+  }
+  
+  /* Style for experiences */
+  .horizontal-experience {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+  
+  .horizontal-experience span {
+    margin-right: 10px;
+  }
+  
+  .styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+  }
+  
+  .styled-table th, .styled-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .styled-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  .btnflex{
+    display: flex;
+    flex-direction: row;
+    gap:20px;
+  }
+  @media screen and (max-width: 768px) {
+    .container {
+      padding: 10px;
+    }
+  }

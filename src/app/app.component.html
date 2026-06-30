@@ -1,0 +1,222 @@
+<div class="container">
+<form [formGroup]="reactiveForm" (ngSubmit)="OnSubmit()">
+<div class="Name">
+  <label for="text_input">Name</label>
+  <input type="text" id="text_input"  placeholder="Enter Name" name="name" formControlName="name">
+  <small *ngIf="reactiveForm.get('name').errors?.['required'] && reactiveForm.get('name').touched">
+    *First Name is a required field.
+  </small>
+  <small *ngIf="reactiveForm.get('name').errors?.['noSpaceAllowed'] && reactiveForm.get('name').touched">
+    *No Space is allowed for First Name.
+  </small>
+</div>
+  <label for="email_input">Email:</label>
+  <input type="email" id="email_input" placeholder="Enter email" name="email" formControlName="email">
+  <small *ngIf="reactiveForm.get('email').invalid && reactiveForm.get('email').touched">
+    *Email is a required field.
+  </small>
+
+  <label for="number_input">Phone-Number:</label>
+  <input type="number" id="number_input"  placeholder="Enter number" name="phone" formControlName="phone">
+  <small *ngIf="reactiveForm.get('phone').invalid && reactiveForm.get('phone').touched && reactiveForm.get('phone').hasError('maxlength') ">
+    *Phone Number is a required field.
+  </small>
+
+  <label for="date_input">Date-Of-Birth</label>
+  <input type="date" id="date_input"  formControlName="dob" name="dob">
+  <small *ngIf="reactiveForm.get('dob').invalid && reactiveForm.get('dob').touched">
+    *Dob is a required field.
+  </small>
+
+  <!-- <label for="checkbox_input">Checkbox:</label>
+  <input type="checkbox" id="checkbox_input" name="checkbox_input"> -->
+
+  <label for="gender">Gender</label>
+  <div class="radio-group">
+    <input type="radio" id="radio_input1"  value="Male" name="gender" formControlName="gender">
+    <label for="radio_input1">Male</label>
+
+    <input type="radio" id="radio_input2" value="Fe-Male" name="gender" formControlName="gender">
+    <label for="radio_input2">Fe-Male</label>
+
+    <input type="radio" id="radio_input3" value="Others" name="gender" formControlName="gender">
+    <label for="radio_input3">Others</label>
+  </div>
+  <small *ngIf="reactiveForm.get('gender').invalid && reactiveForm.get('gender').touched">
+    *Gender is a required field.
+  </small>
+
+  <label for="select_input">Highest-Education:</label>
+  <select id="select_input" formControlName="edu" name="edu">
+    <option hidden>--Select One--</option>
+    <option value="UG">Graduations</option>
+    <option value="PG">Post-Graduation</option>
+    <option value="Phd">Phd</option>
+  </select>
+  <small *ngIf="reactiveForm.get('edu').invalid && reactiveForm.get('edu').touched">
+    *Qualifications is a required field.
+  </small>
+ 
+    <div class="input-box address" formGroupName="address">
+      <label>Address</label>
+      <input type="text" placeholder="Street address" formControlName="address1"/>
+      <small *ngIf="reactiveForm.get('address.address1').invalid && reactiveForm.get('address.address1').touched">
+        *Street Address is a required field.
+      </small>
+      <div class="column">
+          <select name="country" formControlName="country">
+            <option hidden>Country</option>
+            <option>America</option>
+            <option>Japan</option>
+            <option>India</option>
+            <option>Nepal</option>
+          </select>
+          <small *ngIf="reactiveForm.get('address.country').invalid && reactiveForm.get('address.country').touched">
+            *Country is a required field.
+          </small>
+        <input type="text" placeholder="City" formControlName="city"/>
+        <small *ngIf="reactiveForm.get('address.city').invalid && reactiveForm.get('address.city').touched">
+          *City is a required field.
+        </small>
+      </div>
+      <div class="column">
+        <input type="text" placeholder="Region" formControlName="region"/>
+        <small *ngIf="reactiveForm.get('address.region').invalid && reactiveForm.get('address.region').touched">
+          *Region is a required field.
+        </small>
+        <input type="number" placeholder="Postal code" formControlName="pin" />
+        <small *ngIf="reactiveForm.get('address.pin').invalid && reactiveForm.get('address.pin').touched">
+          *PIN is a required field.
+        </small>
+      </div>
+    </div>
+
+
+
+
+
+<div formArrayName="skills">
+  <label for="text_input">Skills</label>
+  <div class="column" *ngFor="let control of reactiveForm.get('skills')['controls']; let i =index">
+    <input type="text" id="text_input" placeholder="add Skills.." name="skills" [formControlName]="i">
+    <small *ngIf="reactiveForm.get('skills').invalid && reactiveForm.get('skills').touched">
+      *Skills is a required field.
+    </small>
+    <button type="button" class="btn-add-delete" (click)="DeleteSkill(i)">Delete</button>
+  </div>
+</div>
+  <button type="button" class="btn-add-delete" (click)="AddSkills()">Add Skills</button>
+
+
+  <div class="input-box"  formArrayName="experience">
+    <div class="experience" *ngFor="let ex of reactiveForm.get('experience')['controls']; let ind = index" [formGroupName]="ind">
+      <label>Experience{{ind+1}}</label>
+      <input type="text" placeholder="Company Name" name="company" formControlName="company"/>
+      <small *ngIf="reactiveForm.get('experience.' + ind + '.company') .invalid && reactiveForm.get('experience.' + ind + '.company').touched">
+        *Company is a required field.
+      </small>
+      <div class="column">
+        <select id="select_input" name="position" formControlName="position">
+          <option hidden>Position</option>
+          <option>Junior Developer</option>
+          <option>Software Developer</option>
+          <option>Senior Developer</option>
+          <option>Team Lead</option>
+      </select>
+      <small *ngIf="reactiveForm.get('experience.' + ind + '.position') .invalid && reactiveForm.get('experience.' + ind + '.position').touched">
+        *Position is a required field.
+      </small>
+        <input type="number" placeholder="Experience" name="exp" formControlName="exp"/>
+        <small *ngIf="reactiveForm.get('experience.' + ind + '.exp') .invalid && reactiveForm.get('experience.' + ind + '.exp').touched">
+          *Experience is a required field.
+        </small>
+      </div>
+      <div class="column">
+        <input type="date" placeholder="Start Date" name="std" formControlName="std"/>
+        <small *ngIf="reactiveForm.get('experience.' + ind + '.std') .invalid && reactiveForm.get('experience.' + ind + '.std').touched">
+          *StartingDate is a required field.
+        </small>
+        <input type="date" placeholder="End Date" name="end" formControlName="end"/>
+        <small *ngIf="reactiveForm.get('experience.' + ind + '.end') .invalid && reactiveForm.get('experience.' + ind + '.end').touched">
+          *EndingDate is a required field.
+        </small>
+      </div>
+      <button type="button" class="btn-add-delete" (click)="deleteExp(ind)">Delete Experience</button>
+    </div>
+  </div>
+
+  <button type="button" class="btn-add-delete" (click)="addexp()">Add Experience</button>
+
+
+
+  
+  <label for="textarea_input">Describe Yourself:</label>
+  <textarea id="textarea_input" rows="4" placeholder="Describe" formControlName="intro"></textarea>
+  <small *ngIf="reactiveForm.get('intro').invalid && reactiveForm.get('intro').touched">
+    *Intro is a required field.
+  </small>
+  <button type="submit" [disabled]="reactiveForm.invalid" [ngStyle]="{'background-color':reactiveForm.valid ? 'black':'gray','cursor':reactiveForm.valid?'pointer':'not-allowed'}" >{{ editingIndex !== -1 ? 'Update' : 'Submit' }}</button>
+
+  <button type="button" (click)="showSubmitted()">Show Submitted Data</button>
+
+  
+</form>
+</div>
+
+<div *ngIf="showSubmittedData">
+<table class="styled-table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone-Number</th>
+      <th>Date-of-Birth</th>
+      <th>Gender</th>
+      <th>Highest-Education</th>
+      <th>Address</th>
+      <th>Country</th>
+      <th>City</th>
+      <th>Region</th>
+      <th>Pin-Code</th>
+      <th>Skills</th>
+      <th>Experience</th>
+      <th>Description</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr  *ngFor="let submission of formSubmissions; let i = index">
+      <td>{{ submission.name }}</td>
+      <td>{{ submission.email }}</td>
+      <td>{{ submission.phone }}</td>
+      <td>{{ submission.dob }}</td>
+      <td>{{ submission.gender }}</td>
+      <td>{{ submission.edu }}</td>
+      <td>{{ submission.address.address1 }}</td>
+      <td>{{ submission.address.country }}</td>
+      <td>{{ submission.address.city }}</td>
+      <td>{{ submission.address.region }}</td>
+      <td>{{ submission.address.pin }}</td>
+      <td>
+        <div class="horizontal-skills">
+          <span *ngFor="let skill of submission.skills" class="skill">{{ skill }}</span>
+        </div>
+      </td>
+      <td>
+        <div *ngFor="let experience of submission.experience" class="horizontal-experience">
+          <span>Company: {{ experience.company }}</span>
+          <span>Position: {{ experience.position }}</span>
+          <span>Experience: {{ experience.exp }}</span>
+          <span>Start Date: {{ experience.std }}</span>
+          <span>End Date: {{ experience.end }}</span>
+        </div>
+      </td>
+      <td>{{submission.intro}}</td>
+      <td>
+        <button (click)="editSubmission(i)">Edit</button>
+        <button (click)="deleteSubmission(i)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
